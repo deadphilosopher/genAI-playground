@@ -1,0 +1,29 @@
+ File Name: array_set.clj
+
+Purpose: The primary purpose of this Clojure file is to define a custom data structure named ArraySet that implements various interfaces from clojure.lang namespace, java.util.Set and other relevant namespaces. This data structure acts as a high-performance set implementation backed by an array in Clojure.
+
+Detailed Description:
+
+- The file defines a maximum size constant (max-size) which is 4.
+- A custom deftype named ArraySet is declared that includes items, size and hashcode fields. This type implements several interfaces from the clojure.lang namespace such as IPersistentSet, IPersistentCollection, Seqable and IFn. It also implements java.util.Set interface to provide additional set operations.
+- The ArraySet data structure has private constructors for creating a new instance of it or an empty array set.
+- The get function is used to return the element at a specified index in the items array if the element exists, otherwise it returns nil.
+- The contains function checks whether the specified item exists in the ArraySet and returns a boolean value.
+- The disjoin function removes the specified item from the ArraySet by swapping its position with the last item in the array and decrementing size. If the item does not exist, it returns the ArraySet as is.
+- The count function returns the number of items in the ArraySet.
+- The cons function adds a new element to the ArraySet if it doesn't already exist and the ArraySet has not reached its maximum size (max-size). If the ArraySet has reached its max size, it will be converted into a hash set with the new item added. If the item already exists in the ArraySet, the function returns the ArraySet as is.
+- The empty function returns an empty instance of ArraySet.
+- The eqiv function checks whether two instances of ArraySet are equal by comparing their hash codes.
+- The seq function returns a sequence of items up to the current size.
+- The hashCode function generates and returns the hash code for the ArraySet. If the hashcode field is -1, it calculates the hash code using unchecked addition. Once calculated, the hash code value is stored in the hashcode field for future use.
+- The equals function checks whether two instances of ArraySet are equal by comparing their references and contents.
+- The invoke and applyTo functions enable ArraySet to be used as a function that accepts a key and returns its corresponding item using get method.
+- Several java.util.Set interface methods (isEmpty, size, toArray, iterator, containsAll) are implemented for interoperability with Java collections.
+- A public factory function named array-set is defined which creates an array-backed set containing the given values by inserting them into the empty-array-set instance.
+
+Areas where comments or clarity could be improved:
+
+- Add more detailed comments to describe what each method does and how it works.
+- The ArraySet implementation could use a more dynamic data structure such as a vector or list to handle resizing dynamically instead of a fixed size array, which may improve its performance for larger sets.
+- A better exception handling strategy can be considered when adding an element that already exists in the ArraySet or exceeds the maximum size. Currently, it returns the same set without any indication or error message.
+- The hashCode function could use a more efficient algorithm for generating the hash code value to minimize collisions and improve performance for large sets.

@@ -1,0 +1,14 @@
+ This Clojure file contains definitions related to creating a simple RESTful service using JAX-RS annotations. The main components are as follows:
+
+1. Namespace declaration: The namespace "com.clojurebook.annotations.jaxrs" is being defined here, and it imports specific classes from the javax.ws.rs package. These include Path, PathParam (for extracting parameters from a URI), Produces (for specifying response media types) and GET (to define a HTTP GET request method).
+
+2. Interface definition: An interface named Greeting is defined with one function "greet" that takes in a string argument 'visitor-name'.
+
+3. Type declaration: A deftype called GreetingResource is declared which implements the Greeting interface. This type has metadata attached to it, specifying its path ("/greet/{visitorname}") for handling HTTP requests. The greet function is then defined with JAX-RS annotations specifying that it handles GET requests and produces "text/plain" media types.
+
+4. Function description:
+    - The "greet" function takes in two arguments, 'this' (the instance of GreetingResource) and 'visitor-name'. This function is called when a HTTP GET request is made to the URL /greet/{visitor-name} with a given 'visitor-name'. It returns a greeting message formatted as "Hello %s!" where '%s' is replaced by the input 'visitor-name'.
+
+5. Usage instructions: The final comments in the code provide steps to run this namespace and create a service. This includes compiling the namespace, starting a Grizzly web container on localhost at port 8080, and referencing the current namespace as a package for JAX-RS resource scanning.
+
+6. Improvements: The code could benefit from adding more comments to explain each component in greater detail. This would be helpful for anyone new to Clojure or this specific library (JAX-RS) trying to understand how the service is set up and configured. Adding function docstrings can also provide clarity about what the function does, its input arguments and return values.

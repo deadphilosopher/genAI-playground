@@ -1,0 +1,23 @@
+ Documentation for `jaxws.clj`
+
+The Clojure source file 'jaxws.clj' is designed to create a simple SOAP web service using JAX-WS. It defines an interface (EchoService) and implements this interface in a type (EchoServiceImpl). The service provides a single method `echo`, which takes a string as input and returns the same string as output.
+
+Here's a more detailed description:
+
+1. Namespace declaration:
+The code begins with defining its namespace as 'com.clojurebook.annotations.jaxws'. It also imports relevant Java classes from the javax.jws and javax.xml.ws packages.
+
+2. Definition of EchoService interface:
+This is a Clojure interface definition for our web service, which uses metadata to annotate it as a WebService with a specific target namespace. The `echo` method within this interface is also marked as a WebMethod. It accepts one argument - a string (message) and has no specified return type.
+
+3. Definition of EchoServiceImpl type:
+This is the implementation of our EchoService interface, annotated with metadata to specify that it is a WebService and that its endpointInterface should be 'com.clojurebook.annotations.jaxrs.EchoService'. The `echo` method in this class simply returns the input message as its output.
+
+4. Running the service:
+The code concludes by providing instructions on how to start up the service locally. To do so, load this file into a Clojure REPL and run the command '(Endpoint/publish "http://localhost:8080/echo" (EchoServiceImpl.))'. This will make the service accessible at http://localhost:8080/echo, and its WSDL can be viewed at http://localhost:8080/echo?wsdl
+
+Areas for improvement in comments or clarity:
+- While the namespace declaration is clear, it would be helpful to have a comment that briefly explains what the overall purpose of this file is.
+- The documentation could also include an explanation about how Clojure's metadata and Java interop capabilities are used in this script.
+- It might be useful to provide more context or example usage for the `echo` method, such as what kind of data it expects to receive or handle.
+- The final comment section on running the service could mention that this command should only be run while developing and not in a production environment, without specifying how to deploy the service properly into a server.

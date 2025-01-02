@@ -1,0 +1,34 @@
+ **ArraySet Broken Documentation**
+
+This Clojure file defines a custom set data structure called ArraySet which is backed by an array. It implements the interfaces IPersistentSet and IPersistentCollection from clojure.lang, allowing it to behave like a standard Clojure set. The set has a maximum size of 4 as defined by `max-size`. This limitation means that if more than 4 unique elements are added to the ArraySet, it will automatically convert into a hash-map based set using the 'into' function in order to accommodate additional elements while maintaining performance.
+
+The following sections describe each component and behavior of this file in detail.
+
+**1. Namespace Declaration:**
+```(ns com.clojurebook.broken-array-set)```
+This declares the namespace for this Clojure file, which is `com.clojurebook.broken-array-set`.
+
+**2. Class Definition: ArraySet**
+The `ArraySet` class defines a custom set data structure. It takes three parameters - an object array called `items`, an integer `size`, and an integer `hashcode`. The items represent the elements of the set, size represents the number of elements in the set, and hashcode is used to cache the hash value for performance optimization.
+
+**Methods:**
+- `get [this x]`: Returns the element if it exists in the ArraySet; otherwise, it returns nil.
+- `contains [this x]`: Checks if an element is present in the ArraySet and returns true if it does, else false.
+- `disjoin [this x]`: Removes an element from the ArraySet if it exists. If the size of the ArraySet reduces to less than 4, then it will not convert back to a hash-map based set.
+- `count [this]`: Returns the number of elements in the ArraySet.
+- `cons [this x]`: Adds an element to the ArraySet if it does not already exist and the size is less than 4; otherwise, it converts the ArraySet into a hash-map based set using 'into'.
+- `empty [this]`: Returns an empty instance of ArraySet.
+- `equiv [this that]`: Compares two sets for equality. It checks if both sets are identical or if they have equal sizes and contain the same elements.
+- `seq [this]`: Converts a portion of the ArraySet into a Clojure sequence containing its elements.
+- `hashCode [this]`: Returns the hashcode for the ArraySet. If the hashcode is -1 (indicating it has not been calculated yet), this method calculates it and sets it as an instance variable.
+- `equals [this that]`: Compares two sets for equality. It checks if both sets are identical, or if they are instances of java.util.Set or IPersistentSet, have the same size, and contain the same elements.
+
+**3. Variables:**
+- `max-size`: A constant that specifies the maximum size of the ArraySet (4).
+- `empty-array-set`: An instance of ArraySet that represents an empty set with a size of 0 and a hashcode of -1.
+
+**4. Function:**
+- `array-set [& vals]`: This function creates a new ArraySet containing the given values. It uses the 'into' function to add elements to the empty-array-set, which may result in converting it into a hash-map based set if more than 4 unique elements are added.
+
+**Comments and Clarity:**
+The documentation for this file is succinct and does not include any examples or usage scenarios. Adding examples could make understanding the functionality of each component easier. Additionally, the comment for the `array-set` function could be expanded to clarify its behavior when adding more than 4 unique elements to the ArraySet.

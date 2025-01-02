@@ -1,0 +1,30 @@
+ Title: Event Handling in Salesorg Namespace
+
+Overview: The `event_handling.clj` file is a Clojure script that defines event handling for the `salesorg` namespace. It uses the 'eventing.processing' library to process two types of events - 'sales/purchase' and 'sales/lead-generation'. This documentation will provide an in-depth analysis of the functions, classes, and key elements present in the file.
+
+File Structure: The code begins by declaring the namespace `salesorg.event-handling` and using a specific function - `process-event`, from the 'eventing.processing' library. Then it defines two methods for processing events based on their event types.
+
+1. Function: process-event (for 'sales/purchase')
+   - Parameters:
+     - evt: This is an event object that contains information about the sale, such as products and username. It is a map data structure in Clojure.
+   - Return Value: None
+   - Usage Example:
+     ```clojure
+     (process-event {:type "sales/purchase" :products ["Product1", "Product2"] :username "JohnDoe"})
+     ```
+   This will print the following message to the console: `We made a sale of [Product1, Product2] to JohnDoe!`
+
+2. Function: process-event (for 'sales/lead-generation')
+   - Parameters:
+     - evt: An event object containing information about the lead generation event. It is also expected to be a map data structure in Clojure.
+   - Return Value: None
+   - Usage Example:
+     ```clojure
+     (process-event {:type "sales/lead-generation" :details "Lead details here"})
+     ```
+   This will print the following message to the console: `Add prospect to CRM system:  {:type "sales/lead-generation" :details "Lead details here"}`.
+
+Areas for Improvement:
+1. Comments: While the code itself is well-documented, it would be beneficial to add comments explaining what each section of the file does and why certain decisions were made during implementation.
+2. Error Handling: In a real-world application, there should be error handling mechanisms in place to account for unexpected input or behavior.
+3. Modularization: For better code maintainability and scalability, it might be beneficial to split this functionality into different files based on their responsibilities (e.g., separate functions for event processing and printing messages).

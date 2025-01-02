@@ -1,0 +1,35 @@
+ File Name: hello_world.clj
+
+   This Clojure source code file defines a simple web service using Ring and Compojure libraries. The main purpose of the file is to create a servlet that serves HTML pages with a link to an image.
+
+   1. Namespace Declaration:
+      - (ns com.clojurebook.hello-world): This line creates a new namespace for the current source code, which helps in organizing and managing Clojure projects.
+
+  2. Library Usage:
+     - The file uses two libraries: Ring (for handling web applications) and Compojure (for routing).
+     - (:use [ring.util.servlet :only (defservice)]): Imports the defservice function from ring.util.servlet library for defining a service.
+     - (:use [compojure.core :only (GET)]) : Imports the GET function from compojure.core library to handle HTTP GET requests.
+
+  3. Service Definition:
+      - The file defines a single web service using defservice and compojure's GET request handler.
+      - This service is mapped to any URL ("*") and returns an HTML string with the requested URI and a hyperlink to "wright_pond.jpg".
+      ```clojure
+         (defservice
+           (GET "*" {:keys [uri]}
+                (format "<html>
+                        URL requested: %s
+                        <p>
+                          <a href=\"/wright_pond.jpg\">
+                            Image served by app server via web.xml <servlet-mapping>
+                          </a>
+                        </p>
+                        </html>"
+                uri)))
+      ```
+      - Parameters: A request object with keys, including the URI of the requested page.
+      - Return Value: An HTML string formatted with the requested URI and a link to "wright_pond.jpg".
+      - Example: If the user navigates to http://localhost:8080/example-page, the service will return an HTML string with "URL requested: /example-page" and the hyperlink to "wright_pond.jpg".
+
+  4. Additional Information:
+     - The code uses gen-class to extend javax.servlet.http.HttpServlet, but it doesn't seem necessary as no methods from this class are used or overridden in the code. It might be an oversight or a left-over piece of code that could be removed for simplicity and clarity.
+     - The code doesn't include any comments or documentation, which would improve readability and maintenance. Adding comments to explain what each part of the code does can help others understand it better.

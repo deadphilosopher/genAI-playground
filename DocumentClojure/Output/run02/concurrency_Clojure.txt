@@ -1,0 +1,14 @@
+ - High-Level Summary:
+     The `concurrency.clj` namespace provides two macros: `futures` and `wait-futures`. These macros are designed to make it easier to create futures for concurrent execution of expressions in Clojure, as well as wait for these futures to complete their tasks.
+
+   - Detailed Description:
+    1. Function/Class: `futures` Macro
+       - Parameters: Takes two arguments: the number of times (n) that each expression should be evaluated concurrently and any number of expressions (& exprs).
+       - Return Value: Returns a vector of futures, which are used to evaluate the expressions asynchronously. Each future evaluates one of the input expressions. The same expression may be evaluated multiple times if specified by the n parameter.
+       - Usage Example: `(futures 3 (Thread/sleep 1000) (println "Done"))` will print "Done" three times, each time after a delay of one second. However, since these prints are executed in different futures, they may not necessarily be printed in order due to asynchronous execution.
+       - Improvements: The macro could have more descriptive names for its parameters, like `number-of-executions` and `expressions`, respectively.
+    2. Function/Class: `wait-futures` Macro
+       - Parameters: Takes the same arguments as the `futures` macro. This macro creates futures using these arguments and then waits for all of them to complete their tasks.
+       - Return Value: Does not return any value. Its primary purpose is to block the current thread until all concurrently evaluated expressions have completed.
+       - Usage Example: `(wait-futures 3 (Thread/sleep 1000) (println "Done"))` will print "Done" three times after a delay of one second each, and it will not proceed to the next line until all these prints are completed. This ensures that the main thread waits for all asynchronous tasks to finish before continuing with other operations.
+       - Improvements: The documentation could clarify that `wait-futures` creates futures using its arguments, which might be confusing if it's not explicitly mentioned in the code.

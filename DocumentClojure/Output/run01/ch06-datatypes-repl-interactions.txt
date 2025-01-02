@@ -1,0 +1,13 @@
+ This script is a benchmarking tool for two set implementations: an array-based set and a hash-based set in Clojure. It measures the performance of these sets by repeatedly adding and removing elements from them.
+
+**Purpose:** The main purpose of this file is to compare the efficiency of two different set data structures (array-based and hash-based) by measuring their execution time for a given number of trials. This will help us determine which set implementation performs better in terms of speed, especially when handling frequent additions and removals of elements.
+
+**Functions:**
+
+1. `microbenchmark`: This function takes a set creation function (`f`) as an argument, along with optional parameters for the size of the input collection (`size`, default 4) and the number of trials to perform (`trials`, default 1e6). The function generates a list of unique symbols as items based on the specified `size`. Then it measures the elapsed time by repeatedly performing addition and removal operations on the set created using the provided function.
+
+2. Anonymous looping and printing functions: These functions are used to iterate over different sizes (from 1 to 4) for both array-based and hash-based sets, calling the `microbenchmark` function for each combination of size and set implementation. The elapsed time for each iteration is printed as output.
+
+**Comments and Clarity:**
+
+The documentation at the beginning could be improved by providing more details about the file's structure, the functions implemented within it, and their purpose. Furthermore, examples of how to use each function could be provided to enhance clarity. Additionally, comments within the code could explain non-trivial sections or logic for better understanding.

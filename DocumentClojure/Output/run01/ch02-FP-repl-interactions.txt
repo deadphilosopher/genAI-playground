@@ -1,0 +1,20 @@
+ Title: Clojure Function Documentation Guidelines
+
+1. File Purpose Summary:
+   - Briefly summarize the main goal or intended usage of the file. This could include any significant libraries used, the type of functions defined, and their general role in a larger system (if applicable).
+
+2. Detailed Function Descriptions:
+   - Each function should have its own section, with a clear name that describes its purpose or functionality.
+   - For each function, specify its parameters and their expected types or values. If the function is variadic, make sure to document this.
+   - Describe in detail what the function does, how it works, and any important assumptions made during its implementation.
+   - Provide examples of usage, including edge cases if relevant. Use code comments for these examples when possible.
+   - Document any side-effects or exceptions that could be thrown by the function, along with their conditions and expected behavior.
+   - Mention any limitations or potential sources of error in using the function.
+
+3. Comment and Clarity Improvements:
+   - Use comments sparingly but effectively to highlight important decisions made during implementation, complex algorithms, or areas that could be confusing for others reading the code.
+   - Ensure all variables have descriptive names. Avoid single-character variable names except for commonly used ones like 'i' in loops or 'k' and 'v' in map destructuring.
+   - Follow a consistent indentation style throughout the file.
+   - Separate logical sections of code with empty lines or comments to improve readability.
+   - Break down long functions into smaller, more manageable ones if necessary.
+   - Document any specific dependencies on external libraries used by the function.

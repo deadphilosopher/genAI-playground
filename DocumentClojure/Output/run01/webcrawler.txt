@@ -1,0 +1,22 @@
+ **Code Review: webcrawler.clj**
+
+This Clojure script implements a concurrent web crawler that explores URLs starting from a specified one, collects words from the HTML content of those pages, and maintains statistics about word frequencies. The script utilizes Clojure's built-in agent system for asynchronous processing and coordination between agents, allowing for efficient multi-threading.
+
+**High-level summary:**
+The primary purpose of this file is to define a web crawler that can explore URLs concurrently, extract words from HTML content, keep track of visited URLs, and maintain word frequencies. The script supports adjustable agent counts and pausing/resuming the crawling process.
+
+**Detailed description:**
+- `links-from`: Takes a base URL and an HTML string, parses the HTML to extract all hyperlinks (`<a>` tags), and returns valid absolute URLs as a collection. If any link is not a valid URL, it is ignored.
+- `words-from`: Extracts words from HTML content, removing JavaScript code blocks and numbers. The extracted words are converted to lowercase for consistency in word frequency tracking.
+- `get-url`: Retrieves the next URL from the queue, slurps its contents if it has not been crawled before, and passes the data to the `process` function. If there's an exception (e.g., network errors), the function returns the current state unchanged.
+- `process`: Receives a map containing a URL and its HTML content, extracts links and words from it, updates word frequencies, and passes results to the `handle-results` function for further processing. If there's an exception, the function still calls `run` on the current agent before exiting.
+- `handle-results`: Updates the set of visited URLs, adds extracted links back into the queue, updates word frequencies, and schedules the next URL retrieval process by calling `get-url`. If there's an exception, it is handled similarly to other functions that can throw exceptions.
+- `run`, `pause`, and `restart`: Manage the execution of agents responsible for crawling URLs. These functions start/stop agent processing and allow for pausing and resuming the process.
+- `test-crawler`: Prepares and executes a web crawl with specified parameters, including the number of agents, starting URL, duration, and reports the results as a vector containing the number of URLs crawled and left in the queue.
+- `main`: Runs the web crawler using command line arguments for the starting URL and agent count (with default values if not provided). The function prints the results of the crawl to standard output and shuts down the agents when complete.
+
+**Areas for improvement:**
+- Documentation: While the functions are generally well-named, it would be beneficial to add additional inline comments explaining more complex sections of code, such as error handling or specific data processing steps.
+- Error handling: Exception handling is currently limited to logging exceptions and continuing with the next URL retrieval process in case of errors. It might be useful to introduce more sophisticated error handling strategies, such as retrying failed URLs after a delay or limiting the number of retries per URL.
+- Configuration management: The script assumes that agent count and starting URL are provided via command line arguments in `main`. A more flexible approach could involve using environment variables or configuration files for these parameters to improve usability and maintainability.
+- Testing: Although `test-crawler` provides a basic way to test the web crawler, it might be beneficial to add more extensive unit tests for individual functions and integration tests for the overall system. This can help ensure that the script behaves correctly in various scenarios and catch regressions if any changes are made in the future.

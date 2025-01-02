@@ -1,0 +1,18 @@
+ Title: Clojure Implementation for Conway's Game of Life - Documentation
+
+**Purpose:** The provided file `life.clj` is a Clojure implementation to simulate Conway's Game of Life, an example of cellular automaton, where each cell can be alive or dead, and its state in the next generation depends on its current state and that of its eight neighbors. This documentation aims to provide clarity about every function defined in this script and explain their usage, parameters, and return values.
+
+**Functions:**
+1. `empty-board`: Creates an empty board with a specified width and height.
+2. `neighbours`: Returns all the valid neighbors of a given cell in the board, excluding cells that are out of bounds.
+3. `stepper`: Creates a step function for Life-like cell automata based on provided neighbor calculation, birth conditions, and survival conditions.
+4. `hex-neighbours` & `hex-step`: Functions to simulate hexagonal game variations. They calculate neighbors and steps in the hexagonal grid.
+5. `rect-stepper`: Returns a step function for standard game of life on a bounded rectangular board of specified size.
+6. `draw`: Function used for drawing the current state of the game using Swing library. It takes width, height, step function, and cells as input parameters.
+7. `rect-demo`: A demonstration function to run the simulation with predefined parameters.
+
+**Classes:**
+- This file doesn't explicitly define any classes or objects; however, it uses Java interoperability (proxying) for creating a GUI using Swing library in Clojure.
+
+**Comments & Clarity Improvements:**
+The documentation is lacking in areas such as the function `empty-board`. It's not defined anywhere but mentioned when explaining other functions like `neighbours` and `rect-stepper`. Understanding the implementation of these undocumented functions would significantly improve clarity. Also, adding comments to some critical or complex sections of code could be beneficial for quick comprehension by new readers.

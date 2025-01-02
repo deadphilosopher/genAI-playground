@@ -1,0 +1,11 @@
+ This code appears to be a simple web crawler implementation in Clojure. A web crawler is a program that automatically browses the World Wide Web in a methodical manner.
+
+The code starts by defining several functions such as `add`, which adds an element to a list while maintaining thread safety using the `locking` construct, and `test-crawler`, which sets up the crawler with a given number of agents (threads) and starting URL, runs the crawler for 60 seconds, and then returns the number of URLs crawled and the number of URLs yet to be visited.
+
+The main component of the code is the definition and usage of agent-based concurrent programming. Agents are a way to encapsulate state and provide safe concurrent access and modification to that state. The crawler uses agents to represent different states (getting a URL, processing it, etc.) and transitions between these states.
+
+The `run`, `pause`, and `restart` functions are used to control the execution of the crawler's agents. The `paused?` function checks whether an agent is currently paused. The `test-crawler` function also demonstrates the use of metadata to store additional information about agents, such as whether they are paused.
+
+The code then defines a simple web crawling workflow using these functions and data structures. It sets up the crawler with 25 agents and a starting URL of "http://www.bbc.co.uk/news/", runs the crawler for 60 seconds, and then prints out the top 10 most common words found on the visited webpages.
+
+Overall, this code provides a simple but functional example of how to use agent-based concurrent programming in Clojure to implement a basic web crawler. However, it could benefit from more detailed documentation, including explanations of the parameters and return values of each function, as well as examples of how to use these functions in different contexts. Additionally, there are areas where comments or clarification could be improved for better understanding of the code's purpose and functionality.

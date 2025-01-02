@@ -1,0 +1,61 @@
+ **File Name:** array_set_broken.clj
+
+**Purpose**: The primary purpose of this Clojure file is to create a custom set data structure named `ArraySet` backed by an array. This custom implementation aims to provide the same functionality as built-in sets but with added optimizations and efficiency for specific use cases.
+
+**Function Documentation:**
+
+1. **`ArraySet` constructor (no name)** - Initializes a new instance of the `ArraySet` data structure.
+   - *Parameters*:
+     - `items`: An object array to store the set's elements.
+     - `size`: The number of items currently in the set.
+     - `hashcode`: A cached hash code value for the set (initially -1).
+   - This constructor does not return a value; it is an internal implementation detail and should not be directly called.
+
+2. **`get` method** - Returns the element equivalent to `x`, if such an element exists in the set.
+   - *Parameters*: `this` (the current ArraySet instance) and `x` (the element to search for).
+   - *Returns*: The element equal to `x` if it exists, or `nil` otherwise.
+
+3. **`contains` method** - Returns a boolean value indicating whether the set contains an element equivalent to `x`.
+   - *Parameters*: `this` (the current ArraySet instance) and `x` (the element to search for).
+   - *Returns*: A boolean value; true if the element is found, false otherwise.
+
+4. **`disjoin` method** - Returns a new set with the specified item removed from this set.
+   - *Parameters*: `this` (the current ArraySet instance) and `x` (the element to remove).
+   - *Returns*: A new ArraySet instance with `x` removed if it existed in the original set; otherwise, returns the original set.
+
+5. **`count` method** - Returns the number of items in this set.
+   - *Parameters*: `this` (the current ArraySet instance).
+   - *Returns*: An integer representing the size of the set.
+
+6. **`cons` method** - Adds an item to a set if it is not already present and returns a new set with that element added. If the maximum array capacity has been reached, switches to using a hash-based set (Java HashSet) for efficiency.
+   - *Parameters*: `this` (the current ArraySet instance) and `x` (the element to add).
+   - *Returns*: A new ArraySet or HashSet instance with `x` added if it was not already in the original set; otherwise, returns the original set.
+
+7. **`empty` method** - Returns an empty ArraySet instance.
+   - *Parameters*: `this` (the current ArraySet instance).
+   - *Returns*: An empty ArraySet instance.
+
+8. **`equiv` method** - Compares this set with another object for equality.
+   - *Parameters*: `this` (the current ArraySet instance) and `that` (the other object to compare against).
+   - *Returns*: A boolean value; true if the objects are equal, false otherwise.
+
+9. **`seq` method** - Returns a sequence containing the elements of this set.
+   - *Parameters*: `this` (the current ArraySet instance).
+   - *Returns*: A sequence of the items in the ArraySet.
+
+10. **`hashCode` method** - Computes and returns the hash code value for this set. This is done by adding up the hashes of all the elements, caching the result to improve efficiency.
+    - *Parameters*: `this` (the current ArraySet instance).
+    - *Returns*: An integer representing the hash code of this set.
+
+11. **`equals` method** - Compares this set with another object for equality. This is done by checking if both objects are sets, have the same size, and contain the same elements.
+    - *Parameters*: `this` (the current ArraySet instance) and `that` (the other object to compare against).
+    - *Returns*: A boolean value; true if the objects are equal, false otherwise.
+
+12. **`array-set` function** - Creates a new array-backed set containing the given values.
+   - *Parameters*: Variable arguments representing the elements to be added to the set.
+   - *Returns*: A new ArraySet instance containing the specified elements.
+
+**Areas for Improvement:**
+
+1. Add comments explaining the overall purpose of the custom `ArraySet` implementation, its advantages over built-in sets, and the problem it aims to solve.
+2. Include inline documentation for each method and function, clearly stating their purposes, parameters, return values, and any exceptions they might throw. This will help others understand and use this code more easily.

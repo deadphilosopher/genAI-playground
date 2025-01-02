@@ -1,0 +1,31 @@
+ The Clojure file `concurrency.clj` defines two macros that facilitate concurrent execution in a more concise and expressive way:
+
+1. `futures`
+2. `wait-futures`
+
+Purpose:
+The purpose of this file is to enable easy management of asynchronous tasks or futures. These functions are particularly beneficial when dealing with IO-bound or blocking operations, allowing for better utilization of CPU resources by not waiting for each operation to complete before moving on to the next one.
+
+Detailed description:
+
+1. `futures`: This macro accepts a number `n` and any number of expressions as arguments. It creates `n` future objects for each expression, which will run concurrently in separate threads. The return value is a vector containing these future objects. Here's an example usage:
+
+    ```clojure
+    (futures 3 (+ 1 2) (* 3 4) (- 5 6))
+    ;; This will create three futures for the given expressions and return them in a vector.
+    ```
+
+2. `wait-futures`: This macro accepts any number of arguments that can be passed to the `futures` macro, waits for all created futures to complete execution, and then discards their results. Here's an example usage:
+
+    ```clojure
+    (wait-futures 3 (+ 1 2) (* 3 4) (- 5 6))
+    ;; This will create three futures for the given expressions and wait for all of them to complete execution. It doesn't return anything, as it only cares about the side effects of the expressions.
+    ```
+
+Areas where comments or clarity could be improved:
+
+- The code could benefit from adding comments explaining what each macro does, its parameters, and its return value. This would make it easier for other developers to understand the purpose and usage of these functions.
+
+- For more complex scenarios or larger numbers of futures, it might be beneficial to document possible error handling strategies or how to retrieve results from futures in a way that preserves their order.
+
+- It could also be useful to provide an example showing how `wait-futures` can handle errors properly, as it currently doesn't handle any exceptions that may occur during the execution of future expressions.

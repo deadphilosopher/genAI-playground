@@ -1,0 +1,29 @@
+ Documentation for CustomException.clj
+
+This Clojure source code defines a custom exception type named `CustomException` that extends the `RuntimeException` class in Java. The main purpose of this file is to create a flexible and dynamic error handling mechanism, which can store additional information alongside standard error messages and stack traces. This can be extremely useful for debugging and troubleshooting complex systems or applications.
+
+Here's a breakdown of the code:
+
+- Namespace Declaration (ns)
+The file begins with a namespace declaration that specifies several options, including extending `RuntimeException` to make it an exception type, implementing `clojure.lang.IDeref` for deference, defining constructors, state variable, initialization function and additional methods.
+
+- Import Statement
+An import statement is used to bring the `CustomException` class into scope. However, since `CustomException` is defined in the same file, this line is unnecessary and could be removed.
+
+- Constructors (-init)
+Two constructors are defined for creating a new instance of `CustomException`. The first takes an info map and a message string as arguments, while the second also accepts a Throwable object representing the cause of the exception. These functions return a vector containing the message (and cause if provided), and an atom that holds the initial state of the exception.
+
+- Dereference Function (-deref)
+The `-deref` function is used to dereference the exception, allowing it to be treated as a regular Clojure data structure. This means that functions like get, assoc and update can be used with instances of CustomException.
+
+- Get Info Method (-getInfo)
+The `-getInfo` method returns the current state of the exception's info map.
+
+- Add Info Method (-addInfo)
+The `-addInfo` function allows adding additional key-value pairs to the exception's info map, which can be useful for providing more context about the error.
+
+Areas where comments or clarity could be improved:
+
+- Explanation of why CustomException extends RuntimeException and implements IDeref might be helpful for readers not familiar with these aspects of Java and Clojure.
+- A brief explanation of what an atom is in relation to the info variable could help clarify its usage within this context.
+- Comments describing how the -init, -deref, -getInfo and -addInfo functions are used together to create a flexible error handling mechanism could provide additional clarity for readers who may not be familiar with these concepts or patterns.

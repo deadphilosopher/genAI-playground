@@ -1,0 +1,35 @@
+ This Clojure script is a simulation of Conway's Game of Life, a cellular automaton devised by the mathematician John Horton Conway in 1970. The file defines several functions that are used to create and manipulate the game board, determine the state of each cell based on its neighbors, and visualize the simulation.
+
+   Functions:
+
+   1. empty-board
+      - Parameters: width (w) and height (h) of the board
+      - Returns: an empty game board represented as a vector of vectors with the specified dimensions
+      - Example: `(empty-board 3 4)` would return a 3x4 matrix filled with nil values.
+
+   2. step
+      - Parameters: current state of all cells in the simulation
+      - Returns: the next state of the cells based on the rules of Conway's Game of Life
+      - Example: `(step #{[0 1] [1 1]})` would return a set representing the new cell states.
+
+   3. stepper
+      - Parameters: functions to determine neighboring cells (neighbours), whether a cell survives (survive?), and whether a cell is born (birth?)
+      - Returns: a function that can be used to simulate Life-like cell automata based on the provided parameters.
+
+   4. hex-step
+      - Parameters: none
+      - Returns: a stepper function for a hexagonal grid using custom neighbor and survival functions.
+
+   5. rect-stepper
+      - Parameters: width (w) and height (h) of the board
+      - Returns: a stepper function for standard game of life on a bounded rectangular board of specified size.
+
+   6. draw
+      - Parameters: width (w), height (h), step function, and initial cell states
+      - Returns: void but creates a visual representation of the simulation using Java Swing.
+
+   7. Other functions such as hex-neighbours and rect-demo are used to demonstrate the use of other functions.
+
+   Areas for Improvement:
+   - The purpose of some functions, like hex-neighbours or rect-stepper, might not be immediately clear from their names. Consider renaming these functions for better clarity.
+   - Adding more comments to explain complex operations or reasoning behind certain decisions could help improve readability and maintainability.

@@ -1,0 +1,22 @@
+ CustomException.clj is a custom exception class designed in Clojure. This file defines an exception that extends RuntimeException and implements IDeref from the clojure.lang namespace.
+
+Purpose:
+The primary purpose of this Clojure source code is to create a custom exception class named CustomException with additional functionalities. The class can be initialized with a map and a message, or a map, a message, and another throwable. It also provides methods to add and retrieve information from the exception object.
+
+Detailed Description:
+
+1. `-init` function:
+    - This is an overloaded constructor for the CustomException class.
+    - The first version takes two arguments: `info` (a map) and `message` (a string). It returns a vector containing the message and an atom that holds the information from the input map.
+    - The second version accepts three arguments: `info`, `message`, and `ex` (a Throwable). It behaves similarly to the first one but also includes the throwable in the returned vector.
+2. `-deref` function:
+    - This function is used when the CustomException object is treated as a reference type, allowing direct access to its information.
+3. `-getInfo` function:
+    - This method returns the exception's associated information (which was provided during initialization).
+4. `-addInfo` function:
+    - This function allows adding additional key-value pairs to the exception's information map. It takes three arguments: the exception object, a key, and a value. The updated information is stored in an atom.
+
+Areas for Improvement:
+
+1. Documentation: While the functions are well named according to Clojure conventions, more detailed comments or documentation could be added to explain their purpose and behavior better.
+2. Error Handling: More robust error handling should be implemented within the `-addInfo` function to handle cases where the input arguments are not of the expected types (e.g., checking that `key` is a keyword, validating the type of `value`, etc.).

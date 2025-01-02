@@ -1,0 +1,38 @@
+ File Name: ch20-nextsteps-repl-interactions.clj
+
+Purpose: This Clojure file uses the `core.logic` library to demonstrate various types of logic programming in a REPL (Read Evaluate Print Loop) environment. Logic programming is a declarative programming paradigm which allows you to state what you want, rather than how you will achieve it.
+
+Functions:
+
+1. `conso`
+   - Description: This function constructs a new sequence with an item at the beginning and a sequence that follows.
+   - Parameters:
+     - `x` : The item to add at the beginning of the sequence.
+     - `seq` : The sequence which will follow the added item.
+   - Returns: A new sequence with `x` as its first element and `seq` following it.
+
+2. `run*`
+   - Description: This function runs a logic program, returning a lazy sequence of the results.
+   - Parameters:
+     - `bindings` : The logical variables to be bound in the computation.
+     - `query` : The goal or query to be solved by the logic program.
+   - Returns: A lazy sequence of maps representing the successful bindings of the logical variables that satisfy the query.
+
+3. `fresh`
+   - Description: This function introduces a scope for fresh (unrelated) logical variables in the computation.
+   - Parameters:
+     - `names` : The names of the fresh logical variables to be introduced.
+     - `query` : The goal or query that involves these fresh logical variables.
+   - Returns: The result of the computation with the fresh logical variables properly instantiated within the specified scope.
+
+4. `==`
+   - Description: This function unifies two expressions, finding a substitution to make them equal.
+   - Parameters:
+     - `expr1` : The first expression.
+     - `expr2` : The second expression.
+   - Returns: A successful result if the unification is possible; otherwise fails.
+
+Code Comments and Clarity:
+- The code itself serves as documentation for what each line does, but it would be helpful to include comments at the beginning of each block of logic programming explaining its purpose.
+- The use of `fresh` in all examples could potentially confuse readers unfamiliar with logic programming since it introduces unrelated variables that may not directly contribute to understanding the specific goal or query being demonstrated. It might be beneficial to explain this usage more explicitly in comments.
+- For clarity, it's good practice to include a brief explanation of what each example is demonstrating at a high level before diving into the logic programming details.

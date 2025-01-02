@@ -1,0 +1,24 @@
+ File Name: junit.clj
+
+Purpose: The primary objective of this Clojure file is to define a Java interoperability test using JUnit annotations. It creates a class with three methods representing different types of tests: a simple equality check, an exception handling test, and a timeout test that could potentially cause the test to fail due to exceeding its defined time limit.
+
+Function Details:
+1. `-simpleTest` function:
+   - Parameters: An instance of the class (represented by 'this').
+   - Functionality: Asserts whether the class of the current instance is equivalent to "com.clojurebook.annotations.JUnitTest". If they're not equal, an AssertionError will be thrown.
+   - Usage example: In the context of JUnit testing, this function is invoked as a test case to check if the instance being tested belongs to the correct class.
+
+2. `-badException` function:
+   - Parameters: An instance of the class (represented by 'this').
+   - Functionality: This function attempts to parse an integer from a non-existent system property. Since no such property exists, a NumberFormatException will be thrown as it tries to parse "null" into an integer. However, due to the expected exception declaration in the JUnit test annotation (specifying NullPointerException), this discrepancy doesn't result in a test failure.
+   - Usage example: This function is used as a test case to verify that the correct type of exception is thrown under specific conditions. In this case, it's checking for a NullPointerException rather than a NumberFormatException, which would cause the test to fail if not accounted for in the annotation.
+
+3. `-timeoutTest` function:
+   - Parameters: An instance of the class (represented by 'this').
+   - Functionality: The thread execution is paused for 10 seconds using Thread/sleep, which exceeds the defined timeout limit of 2000 milliseconds in the JUnit test annotation. As a result, this test will fail due to the timeout being exceeded.
+   - Usage example: This function serves as a test case that verifies whether the specified time limit for its execution is obeyed. If the method doesn't complete within the given time frame, the test will be marked as failed.
+
+Areas where comments or clarity could be improved:
+- The naming of the test methods (-simpleTest, -badException, and -timeoutTest) could be more descriptive to better reflect their intended functionality.
+- In the context of the `-badException` function, it would be beneficial to include a comment explaining that despite throwing a NumberFormatException (due to parsing "null"), the test will not fail because it's expecting a NullPointerException as per its annotation declaration. This discrepancy in expected exceptions could potentially cause confusion.
+- It might also be helpful to provide a general comment at the beginning of the file briefly explaining that this is a Clojure script used for Java interoperability testing using JUnit annotations.

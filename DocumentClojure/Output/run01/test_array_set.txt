@@ -1,0 +1,16 @@
+ File Name: test_array_set.clj
+
+Purpose:
+This Clojure file is a test suite for the `array-set` function implemented in `com.clojurebook.array-set`. It uses the built-in Clojure testing library to verify various aspects of the array-set implementation, such as correctness and performance. The tests include checking for basic functionality, immutability of sets, promotion from arrays to hash sets, and benchmarking against the native `hash-set` function.
+
+Detailed Function Descriptions:
+1. test-array-set: A deftest function that runs several tests on the `array-set` function, including testing for empty set equality, adding elements to a set, checking membership of elements in a set, and confirming that sets are created correctly from sequences. It also checks that the hash values of two different but equal sets are the same.
+2. verify-immutability: A deftest function that ensures that `array-set` maintains immutability by demonstrating that two identical arrays generate the same set, and that removing elements from a set does not modify the original set.
+3. verify-promotion: A deftest function that tests whether an array with more than 16 unique elements is promoted to a `PersistentHashSet`. This test ensures that `array-set` can handle larger data sets efficiently.
+4. bench-set: A benchmarking function that takes a set implementation function and optional parameters for the size of the set (default 4) and number of trials (default 1,000,000). It creates a vector of unique symbols and tests the speed of membership checks on the resulting set. The benchmark function then measures how long it takes to perform repeated insertions and deletions from the set.
+5. microbenchmark: A function that runs `bench-set` for different sizes (1 to 4) and implementations (`array-set` and `hash-set`) to compare performance. It prints the results to the console.
+
+Areas for Improvement:
+- Comments could be added to clarify what each test is doing, especially in more complex sections of the code.
+- Error handling could be improved by adding assertions or throwing exceptions when invalid inputs are provided to `array-set` or `bench-set`. For example, it might make sense to check that the size and trials parameters passed to `bench-set` are positive integers.
+- It would be helpful to include a brief explanation of how sets and hash maps work in Clojure, as well as any relevant terminology, at the beginning of the file or within appropriate comments. This could make it easier for readers who are new to the language to understand the purpose and function of the tests.

@@ -1,0 +1,22 @@
+ # Clojure JAX-WS Documentation
+
+## Overview
+This Clojure script defines a simple JAX-WS (Java API for XML Web Services) web service named `EchoService`. The service has one method, `echo`, which takes a string as an input and returns the same string.
+
+## File Structure and Namespaces
+The file is named `jaxws.clj` and it uses the namespace `com.clojurebook.annotations.jaxws`. It imports necessary classes from Java's JAX-WS library, such as `WebService`, `WebMethod`, and `Endpoint`.
+
+## Interface: EchoService
+The `EchoService` is defined using a Clojure interface with the `definterface` function. The metadata associated with this interface specifies that it's a Web Service with its target namespace set to "com.clojurebook.annotations.jaxrs". It also specifies that the `echo` method is a web method.
+
+## Function: echo
+The `EchoService` has one function, `echo`, which takes two parameters - `this` (representing the instance of the service) and `message` (a string). The function simply returns the `message` that it receives.
+
+## Class: EchoServiceImpl
+The `EchoServiceImpl` is a deftype (Clojure's equivalent to Java's classes) which implements the `EchoService` interface. The metadata associated with this class specifies its endpoint interface as "com.clojurebook.annotations.jaxrs.EchoService".
+
+## Running the Service
+To run the service, you can load this file into your REPL (Read-Evaluate-Print Loop) and then call `(Endpoint/publish "http://localhost:8080/echo" (EchoServiceImpl.))`. After that, you can access the service's WSDL at http://localhost:8080/echo?wsdl.
+
+## Improvements
+While the script is clear and functional, it could benefit from more detailed comments to help understand its purpose and functionality better. It would also be beneficial to handle exceptions or errors that might occur during service execution.

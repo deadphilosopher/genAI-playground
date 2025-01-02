@@ -1,0 +1,31 @@
+ File Name: webcrawler.clj
+
+Purpose:
+The `webcrawler.clj` file contains a Clojure program that serves as a basic web crawler. The program uses the Enlive HTML library to navigate and extract data from URLs, enabling it to traverse a website by following hyperlinks and collecting words found on each page. This is accomplished through the use of agents for concurrent processing and blocking queues to manage the URLs to be crawled.
+
+Function Descriptions:
+1. `links-from`:
+   - Parameters: base-url (URL) and html (enlive/HTML object)
+   - Returns a sequence of URL objects derived from the input HTML document's hyperlinks, filtered by their validity with respect to the given base-url.
+2. `words-from`:
+   - Parameter: html (enlive/HTML object)
+   - Extracts and returns a sequence of words found within the body text of an HTML document, ignoring script tags and numeric-only values. All extracted words are converted to lowercase.
+3. `get-url`:
+   - Parameter: state (a map containing a blocking queue)
+   - Retrieves a URL from the blocking queue, attempts to load its content, and updates the state of the crawler accordingly. If loading fails or if the URL has been previously crawled, the function returns an unchanged state.
+4. `process`:
+   - Parameter: state (a map containing a url and content)
+   - Processes the content of a URL by parsing it as HTML using Enlive, extracting its hyperlinks and words, and updating the state with this information.
+5. `handle-results`:
+   - Parameter: state (a map containing url, links, and words)
+   - Updates the crawled URLs and word frequencies, adds any new links to the queue for further processing, and prepares the state for the next URL to be processed.
+6. `run`, `pause`, `restart`:
+   - Functions for managing the agents responsible for web crawling tasks. Agents are used to enable concurrent processing. The `run` function starts or resumes agent execution, while `pause` and `restart` functions pause and resume the agents' operation, respectively.
+7. `test-crawler`:
+   - Resets all crawler state, adds a given starting URL to the queue, runs the crawler for 60 seconds, pauses it, and returns the number of URLs crawled and the number of remaining queued URLs.
+8. `-main`:
+   - Accepts a starting URL and an optional agent count as arguments from the command line, initializes the web crawler with these parameters, runs the crawler for 60 seconds, prints the results, and shuts down the agents before exiting.
+
+Areas for Improvement:
+- Documentation comments are lacking for some functions and variables. Adding documentation comments would make it easier to understand the purpose and usage of each function or variable in isolation.
+- Error handling could be improved for more robust execution. Currently, errors that occur during URL loading or processing cause the program to continue executing with an unchanged state. Providing better error reporting and failure management strategies could help improve the crawler's overall reliability and performance.

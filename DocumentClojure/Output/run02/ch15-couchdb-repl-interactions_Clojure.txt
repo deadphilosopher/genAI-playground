@@ -1,0 +1,31 @@
+ Title: CouchDB Event Processing System Documentation
+
+Purpose: This document provides a high-level summary and detailed documentation for the CouchDB event processing system described in the provided code snippets. The system is designed to handle events, process them based on their type, and store or manipulate data accordingly.
+
+Summary:
+The CouchDB event processing system consists of several namespaces and functions that work together to define a robust event handling mechanism. Key components include:
+
+1. Eventing Types (eventing.processing): Defines the different types of events that can be processed, such as 'sales/purchase' and 'sales/lead-generation'. The processing namespace also contains a multi-method definition for processing events based on their type.
+
+2. Event Handling (salesorg.event-handling): Implements the specific actions to be taken when certain types of events are encountered. For example, it defines what happens when a 'sales/purchase' event is processed (adding a sale to a record) and what happens when a 'sales/lead-generation' event is processed (adding a prospect to a CRM system).
+
+3. CouchDB Interaction: The provided code snippets demonstrate how to interact with a CouchDB database, including inserting documents, watching for changes, defining filters, and handling document updates.
+
+Detailed Documentation:
+
+1. Eventing Types (eventing.processing)
+- This namespace defines the event types that can be processed by the system.
+- The 'process-event' function is a multi-method definition that allows extending the system to handle new event types in the future. It takes an event as input and dispatches it to the appropriate method based on its type.
+
+2. Event Handling (salesorg.event-handling)
+- This namespace implements specific actions to be taken when certain types of events are encountered.
+- The 'process-event' function is extended with methods for handling 'sales/purchase' and 'sales/lead-generation' events. For a 'sales/purchase' event, it prints a message indicating the sale that was made. For a 'sales/lead-generation' event, it prints a message adding the prospect to a CRM system.
+
+3. CouchDB Interaction
+- The provided code snippets demonstrate how to interact with a CouchDB database.
+- A filter is defined using the 'clutch/watch-changes' function that only allows events of type 'processing/realtime' to be processed further. This filter improves performance by reducing the number of documents that need to be examined.
+- The ':process-events' watcher is set up to handle changes in the CouchDB database and process real-time events as they occur. Events are passed through a series of transformations, including removing the '_id' and '_rev' fields, converting the event type to a symbol, and then processing it using the 'process-event' function.
+
+Areas for Improvement:
+- While the current system is well-documented and functions as intended, additional error handling and logging could be added to improve its robustness and maintainability. This would help to identify issues more quickly and provide more insight into the system's behavior.
+- The system currently processes events in real-time, but it may be desirable to add batch processing capabilities for improved efficiency. For example, instead of processing each event individually, they could be grouped and processed in batches. This would reduce the overhead of establishing a connection to the database for each event and improve performance when handling large volumes of data.

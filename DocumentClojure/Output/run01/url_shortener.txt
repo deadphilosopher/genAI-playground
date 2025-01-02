@@ -1,0 +1,52 @@
+ File Name: url_shortener.clj
+
+Purpose Summary:
+The given Clojure file implements a URL shortening service using the Compojure library in Clojure. The primary functions of this program include accepting URLs, generating unique identifiers for them (either provided or auto-generated), and handling redirections from these unique identifiers to their corresponding original URLs.
+
+Detailed Function Description:
+1. `url-for`: A function that takes a short identifier as an argument and returns the corresponding original URL if it exists in the `mappings`. If not, then it returns nil.
+   - Parameters:
+      * id (String): The short URL identifier for which the original URL is to be retrieved.
+   - Returns:
+      * String or nil: The original URL associated with the given short URL identifier if it exists; otherwise, nil.
+   - Example:
+      `(url-for "abcd") ;=> "http://www.clojure.org"`
+2. `shorten!`: A function that stores a given URL under a new unique identifier and returns the identifier as a string. If an identifier is provided, it uses that; otherwise, it generates a new one. This function modifies the global mapping accordingly.
+   - Parameters:
+      * url (String): The original URL to be shortened.
+      * id (String, optional): An optional parameter for specifying a custom short URL identifier. If not provided, a new unique identifier is generated automatically.
+   - Returns:
+      * String or nil: The short URL identifier under which the given URL has been stored; if the provided identifier is already taken, then it returns nil.
+   - Examples:
+     `(shorten! "http://www.clojure.org") ;=> Generates a new unique id, say "abcd", and maps "http://www.clojure.org" to this id`
+     `(shorten! "http://www.clojure.org" "abcd") ;=> Stores "http://www.clojure.org" under the identifier "abcd"`
+3. `retain`: A function that accepts a URL and an optional identifier, shortens it using `shorten!`, and returns an appropriate response depending on whether the operation was successful or not.
+   - Parameters:
+      * url (String): The original URL to be shortened.
+      * id (String, optional): An optional parameter for specifying a custom short URL identifier. If not provided, a new unique identifier is generated automatically.
+   - Returns:
+      * Map: A map containing the status, headers and body of the response, depending on whether the operation was successful or not.
+   - Examples:
+     `(retain "http://www.clojure.org") ;=> {:status 201 :headers {"Location" "abcd"} :body "URL http://www.clojure.org assigned the short identifier abcd"}`
+     `(retain "http://www.clojure.org" "abcd") ;=> {:status 409 :body "Short URL abcd is already taken"}`
+4. `redirect`: A function that takes a short URL identifier as an argument and returns a redirection to the corresponding original URL if it exists in the mappings. If not, then it returns a 404 error response.
+   - Parameters:
+      * id (String): The short URL identifier for which the redirect response is to be generated.
+   - Returns:
+      * Ring Response: A redirection response object (if the given short URL identifier exists in the mappings) or an error response map (if it doesn't).
+   - Examples:
+     `(redirect "abcd") ;=> A redirection response to "http://www.clojure.org"`
+     `(redirect "efgh") ;=> {:status 404 :body "No such short URL: efgh"}`
+5. `app*`: A Compojure routes function that defines the API endpoints and their associated handlers for this application. It supports GET, PUT, POST requests on different paths.
+   - Endpoints and Handlers:
+      * GET "/": Returns a welcome message.
+      * PUT "/:id": Calls `retain` function with given URL and id to store the URL under the specified identifier.
+      * POST "/": Calls `retain` function with given URL to store it under a new unique identifier if no URL parameter is provided, returns an error response otherwise.
+      * GET "/:id": Calls `redirect` function with given id and redirects to the corresponding original URL if it exists; returns an error message otherwise.
+      * GET "/list/": Returns a list of all short URL identifiers in the system.
+      * Not found route: Returns a "Sorry, there's nothing here." message for any unmatched requests.
+6. `app`: The Compojure API handler function that wraps the app* routes to make it suitable for deployment with Ring-based servers.
+
+Areas for Improvement and Suggestions:
+1. The comment on line 42 indicates that there's code for running the application locally using Jetty, but it is currently commented out. This could be removed or uncommented based on the actual usage of this program.
+2. Adding more specific comments within the functions to clarify their internal workings would enhance comprehensibility and maintenance of the codebase. For example, adding a comment explaining how the `dosync` block in `shorten!` ensures atomicity during modifications to the mappings ref could be beneficial.

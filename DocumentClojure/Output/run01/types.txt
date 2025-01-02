@@ -1,0 +1,19 @@
+ Documentation:
+
+   This Clojure source file (types.clj) is a part of an 'eventing' namespace. The primary functionality of this script is to define event types hierarchically using Clojure's type hierarchy mechanism (derive). By doing so, it creates relationships between different events that exist in the application's domain. This allows for efficient event handling based on these relationships.
+
+   Detailed Description:
+
+   1. `(derive 'sales/purchase 'sales/all)` : It defines that 'sales/purchase' is a more specific type of 'sales/all'. Events of type 'sales/purchase' can be handled as 'sales/all' events but not the other way around.
+   2. `(derive 'sales/purchase 'finance/accounts-receivable)` : This line further specializes the 'sales/purchase' event by stating that it is also a subtype of 'finance/accounts-receivable'. This could imply that any sales purchase would be considered an accounts receivable in the financial context.
+   3. `(derive 'finance/accounts-receivable 'finance/all)` and `(derive 'finance/all 'events/all)` : These lines introduce a more general type 'finance/all' that encompasses all events related to finance, and it is a subtype of the most general event type 'events/all'.
+   4. `(derive 'sales/all 'events/all)` : This line introduces another relationship stating that all sales-related events are also considered as generic events.
+   5. `(derive 'sales/RFQ 'sales/lead-generation)` and `(derive 'sales/lead-generation 'sales/all)` : These lines demonstrate a more specific type of sales event, a request for quotation (RFQ), which is a form of lead generation.
+   6. `(derive 'auth/new-user 'sales/lead-generation) and (derive 'auth/new-user 'security/all)` : These lines introduce another type of event that falls under both the sales domain as lead generation and a more general security domain.
+   7. `(derive 'security/all 'events/all)` : This line declares that all security events are part of the most general event category.
+
+   Areas for Improvement:
+
+   - Commenting: There are no comments in the code which could make it difficult for other developers to understand the purpose and functionality of each section or line of code. Comments can significantly improve readability and maintainability.
+   - Naming Conventions: The naming convention used for event types (lowercase with hyphens) is not consistent with Clojure's standard naming conventions which usually use kebab-case. This might lead to confusion among developers as they may expect a different naming convention.
+   - Documentation Structure: While the hierarchy and relationships between events are well defined, it would be beneficial to provide a high-level overview or summary of how this hierarchical structure is used in the application's event handling system. This can help clarify the purpose and intended use of this script.

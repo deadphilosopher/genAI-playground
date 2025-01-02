@@ -1,0 +1,22 @@
+ Documentation for test_array_set.clj
+
+Purpose:
+This Clojure file is a testing suite for the 'array-set' function located in the 'com.clojurebook.array-set' namespace. The tests are designed to verify various aspects of the array-set functionality, such as correctness, immutability, promotion, and performance compared to hash-set.
+
+Functions:
+1. com.clojurebook.test-array-set/test-array-set: A test function that includes multiple subtests. It verifies the basic functionalities of array-set by comparing it with empty sets, single element sets, and character sets derived from strings. It also checks for membership and non-membership, as well as hash consistency.
+
+2. com.clojurebook.test-array-set/verify-immutability: This test function ensures that the array-set remains unchanged after attempts to modify it by adding and then removing elements.
+
+3. com.clojurebook.test-array-set/verify-promotion: This test confirms that when array-set is used with a larger number of elements, it automatically promotes from a persistent vector to a persistent hash set to maintain performance.
+
+4. com.clojurebook.test-array-set/bench-set: A benchmarking function that times how long it takes for the specified number of trials to execute containment checks and random insertions and deletions on a collection created using either array-set or hash-set.
+
+5. com.clojurebook.test-array-set/microbenchmark: A benchmarking helper function that runs the bench-set function for multiple sizes (1 to 4) with both array-set and hash-set, printing the results.
+
+Suggested improvements:
+1. More comments explaining the overall structure of the file and each test case in detail would be beneficial.
+2. Add type hints or spec declarations for better code clarity and performance.
+3. Use a different approach for verifying immutability (e.g., using transducers) to improve readability and efficiency.
+4. Add a test case for checking the behavior of array-set with duplicate elements.
+5. Consider adding tests for edge cases, such as empty collections or collections containing nil values.

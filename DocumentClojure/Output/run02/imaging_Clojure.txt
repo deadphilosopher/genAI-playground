@@ -1,0 +1,37 @@
+ Documentation for imaging.clj:
+
+   Overview:
+
+   This Clojure file provides functionalities to load, resize images, and create a standalone application for image resizing operations. The primary namespace is `com.clojurebook.imaging`. It imports necessary Java libraries for handling images in a graphical user interface (GUI) environment.
+
+   Functions:
+
+   1. `load-image`: This function takes an input parameter `file-or-path`, which can be either a file object or a string representing the path of an image file. The function reads this image file and returns its content as an Image object using Java's `ImageIO/read`.
+
+      - Parameters: `file-or-path` (a file object or a string representing the path to an image)
+      - Returns: An Image object
+
+   2. `resize-image`: This function accepts two parameters, an `original` image and a `factor` that determines how much the image should be enlarged or reduced. It creates a new BufferedImage with dimensions scaled by the factor. Then it draws the original image onto this newly created image using Java's Graphics2D and AffineTransform classes to handle scaling.
+
+      - Parameters: `original` (an Image object), `factor` (a double)
+      - Returns: A BufferedImage object with dimensions scaled by the factor
+
+   Classes:
+
+   1. `ResizeImage`: This class is generated using Clojure's gen-class macro and has two static methods. The `resizeFile` method loads an image, resizes it, and writes the output to a specified file path. The `resize` method takes an Image object and a scaling factor and returns a BufferedImage.
+
+      - Methods:
+         + `resizeFile [String String double] void`: Accepts three strings (input file path, output file path, and scale factor as a string) and performs image resizing operation by calling the private function `-resizeFile`.
+         + `resize [java.awt.Image double] java.awt.image.BufferedImage`: Takes an Image object and a double representing the scaling factor, then calls the private function `-resize` to perform the image resizing operation and returns the result as a BufferedImage.
+
+   Private Functions & Methods:
+
+   1. `-resizeFile`: This is a helper function that accepts three parameters - input file path (string), output file path (string), and scaling factor (double). It uses the `load-image` and `resize-image` functions to perform image resizing operations, then writes the result to the specified output file using Java's ImageIO class.
+
+   2. `-main`: This is the entry point for standalone applications created with gen-class. It accepts command line arguments - input file path, output file path, and scaling factor as a string. If these arguments are not provided, it prints usage instructions to the console and exits the program with an error code 1. Otherwise, it calls `-resizeFile` function with the provided arguments.
+
+   Improvements:
+
+   - The file could benefit from more comments explaining the overall purpose of the namespace and individual functions. It would also be beneficial to add docstrings for each function and class, providing clear descriptions of their purposes and usage. This would make it easier for other developers to understand and use the code.
+   - In `-main`, error handling could be added for parsing the scaling factor from a string to a double. If an invalid value is provided, the program should handle this gracefully instead of crashing with an exception.
+   - The namespace declaration at the top of the file could include more detailed information about its purpose and functionality, such as a version number or author name. This can make it easier for others to understand the code and use it in their own projects.

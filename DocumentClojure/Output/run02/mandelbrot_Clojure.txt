@@ -1,0 +1,19 @@
+ This Clojure file `mandelbrot.clj` is a program to visualize the Mandelbrot set, a popular mathematical concept explored in fractal geometry. The program calculates membership within and the number of iterations required for points in a complex plane to escape from the Mandelbrot set, then renders these results as text or an image.
+
+Here's a breakdown of each function:
+
+1. `escape` - Returns the number of iterations required before the value of z (using components `a` and `b`) can be determined to have escaped the Mandelbrot set. If z will not escape, it returns -1. This function is used to determine if a given point in the complex plane is part of the Mandelbrot set or not.
+2. `fast-escape` - A primitive-hinted variant of `escape` that can result in an order-of-magnitude performance improvement when used instead. It's a more optimized version of the escape function, providing better performance for large input sizes.
+3. `mandelbrot` - Calculates membership within and number of iterations required for points in a given range of the complex plane to escape from the Mandelbrot set. This data is stored as a 2D array which can then be rendered as text or an image.
+4. `coerce-mandelbrot-args` - A helper function that coerces command line arguments to their appropriate data type (either string, double, long, or keyword).
+5. `print-usage` - Prints a help message detailing how to use the program and its command line options.
+6. `render-image` - Renders the Mandelbrot set as an image using Java's Graphics2D class. This function takes a 2D array of escape iterations as input and outputs a BufferedImage object.
+7. `-main` - The entry point for the program. It coerces the command line arguments to their appropriate data type, checks that they are valid, and then renders the Mandelbrot set as an image which is saved to disk.
+8. `-fast-main` - Same as -main but uses with-redefs to replace escape with its optimized variant fast-escape. This function can provide better performance for large input sizes at the cost of additional memory usage.
+
+Improvements for Comments and Clarity:
+
+1. Add more comments to explain what each section of code is doing, especially any complex or non-obvious calculations.
+2. Include examples in documentation for how to use each function, including sample input and output.
+3. Use consistent formatting and style throughout the file, such as using appropriate spacing between functions and within nested expressions.
+4. Consider using more descriptive variable names to improve code readability.

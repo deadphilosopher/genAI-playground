@@ -1,0 +1,23 @@
+ **File Name:** ch10-REPL-oriented-repl-interactions.clj
+
+**File Purpose:** This Clojure file is a demonstration of REPL-oriented programming techniques. The program creates a simple GUI application that displays the function names from the Clojure core namespace and provides documentation for each function when selected by the user. Additionally, various interactive REPL commands are used to illustrate their functionality.
+
+**Function Documentation:**
+
+1. `(ns com.clojurebook.fn-browser ...)`: Defines a new namespace with an imported JList component that contains sorted function names from the Clojure core namespace. A JFrame is also created to display this list, as well as a "Show Info" button that calls the `show-info` function when clicked.
+
+2. `(defn show-info [] ...)`: This function retrieves the selected value in the fn-names list and displays its documentation string using Java Swing's JOptionPane component. If no item is selected, this function does nothing.
+
+3. Other functions demonstrated include:
+   - `split-with`, `zipmap`, and `apply` with `zipmap` for transforming data structures.
+   - `throw` and `pst` for exception handling.
+   - `apropos`, `source`, and `doc` for querying REPL documentation.
+   - `all-ns`, `filter`, `remove-ns`, and `in-ns` for managing namespaces.
+   - Various interactive commands such as `lein plugin install swank-clojure 1.3.4`.
+   - `defn` and `partial` for function definition and partial application.
+
+**Areas for Improvement:**
+
+- The comment sections could be expanded to provide more detailed explanations of the code's functionality, especially for less common or complex commands like `split-with`, `zipmap`, `apply`, `throw`, `pst`, `apropos`, `source`, and `doc`.
+- Adding type hints or specifying functions can improve performance by enabling static typing and preventing type errors.
+- In the documentation section for `defn` and `partial`, it would be beneficial to explain how redefining a function can affect any existing references to that function, as demonstrated in one of the examples.

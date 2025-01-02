@@ -1,0 +1,21 @@
+ File Name: array_set.clj
+
+   Purpose:
+   The "array_set.clj" file is a Clojure program that implements a custom Set data structure, ArraySet, which uses an array for efficient storage and retrieval of elements. It supports various operations like getting an element, checking if an element exists, removing an element, counting the number of elements, adding an element, checking if the set is empty, comparing sets for equality, generating a sequence of elements, calculating hash code, and converting to Java's Set interface.
+
+   Functions, Classes and Key Elements:
+
+   1. ArraySet - A custom Set data structure implemented as a deftype that implements multiple protocols (IPersistentSet, IPersistentCollection, Seqable, Object, IFn, java.util.Set). The type takes three fields - items (an array of objects), size (the number of elements in the set) and hashcode (calculated when needed).
+      - Methods: get, contains, disjoin, count, cons, empty, equiv, seq, hashCode, equals, invoke, applyTo, isEmpty, size, toArray, iterator, containsAll.
+   2. empty-array-set - A private variable that holds an instance of the ArraySet type with no elements. It's created using a max-size constant and initialized with nil values in the items array.
+   3. max-size - A private constant that determines the maximum size of the underlying array for the ArraySet data structure.
+   4. array-set - A function that creates an array-backed set containing the given values by inserting them into the empty-array-set variable.
+      - Parameters: vals (variable number of arguments).
+      - Return value: An instance of the ArraySet type with the specified elements.
+
+   Areas for Improvement:
+
+   1. Comments and Documentation: The file contains detailed comments that explain what each method does, which is beneficial for understanding the code's functionality. However, adding documentation strings (docstrings) to functions and classes can make it more readable and discoverable by Clojure's built-in doc feature.
+   2. Error Handling: The `applyTo` method of the ArraySet type throws an ArityException if the number of arguments is not equal to 1, but there could be additional error checking and handling for other methods as well.
+   3. Code Duplication: The `cons`, `disjoin`, and `toArray` methods all have similar structures that iterate over the items array. Refactoring these sections into reusable helper functions could improve code readability and maintainability.
+   4. Performance Optimization: The current implementation of the `contains` method uses a linear search, which can be inefficient for larger sets. Implementing a more efficient data structure or algorithm to store elements (e.g., binary search trees, hash maps) may improve performance when dealing with large sets.

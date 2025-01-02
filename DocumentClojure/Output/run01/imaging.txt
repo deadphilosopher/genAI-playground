@@ -1,0 +1,29 @@
+ File: imaging.clj
+
+The `imaging.clj` file is a Clojure source code file that provides functions for loading, resizing, and saving images using Java's AWT (Abstract Window Toolkit) and ImageIO libraries. This file defines two primary functions: `load-image`, which reads an image from a given file path or URL, and `resize-image`, which scales up or down the size of an input image by a specified factor.
+
+1. Function: load-image
+   - Purpose: Reads an image from a provided file path or URL using Java's ImageIO library.
+   - Parameters:
+     - `file-or-path` (String): The path to the target image file or its URL as a string.
+   - Return Value: A BufferedImage object that represents the loaded image, or nil if loading fails.
+   - Example: (load-image "path/to/your/image.png")
+
+2. Function: resize-image
+   - Purpose: Scales up or down the size of an input image by a specified factor using Java's Graphics2D and AffineTransform libraries.
+   - Parameters:
+     - `original` (Image): The original image to be resized, which can be any implementation of the java.awt.Image interface.
+     - `factor` (double): A scaling factor that determines how much larger or smaller the output image will be compared to the input image.
+   - Return Value: A BufferedImage object that represents the resized image.
+   - Example: (resize-image original_image 1.5)
+
+3. Gen-class and main method for executable JAR file:
+   - Purpose: Allows this Clojure code to be compiled into an executable Java Archive (JAR) file with a main entry point that can resize images based on command line arguments.
+   - Methods:
+     - `resizeFile`: Accepts three string parameters and a double for the input file path, output file path, and scaling factor, respectively. It loads an image from the input file path, resizes it by the specified factor using the `load-image` and `resize-image` functions, and saves the result to the output file path in PNG format.
+     - `resize`: Accepts a java.awt.Image object and a double for the scaling factor and returns a BufferedImage object that represents the resized image using the `resize-image` function.
+
+4. Additional Notes:
+   - The code uses Clojure's thread-last macro (->) and interop features to leverage Java libraries and classes directly in Clojure code.
+   - The `load-image`, `resize-image`, `-resizeFile`, and `-main` functions are defined with appropriate type hints for better performance when working with Java interoperability.
+   - The main entry point of the executable JAR file checks if it receives valid command line arguments and exits with an error message if not. It also parses a string representation of the scaling factor to a double using `Double/parseDouble`.

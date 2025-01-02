@@ -1,0 +1,17 @@
+ File Name: url_shortener.clj
+
+Purpose: This Clojure script is a URL shortening service implemented as a RESTful API with Compojure. It provides endpoints to create, retrieve and redirect shortened URLs. The program uses an atom to generate unique identifiers for each URL, and a reference type (Ref) to store the mappings between the shortened ID and the original URL.
+
+Functions and Key Elements:
+- `ns`: Namespace declaration. It defines the package and dependencies required by the script.
+- `counter` and `mappings`: Both are used to keep track of the URL mappings. The `counter` atom is used as a counter to generate unique shortened URL IDs, while the `mappings` Ref stores these IDs associated with their respective original URLs.
+- `url-for` function: This function takes an ID as input and returns the corresponding URL from the `mappings`.
+- `shorten!` function: This is a multi-arity function that either generates a new unique identifier for the given URL or stores the URL under the provided identifier. If no identifier is provided, it generates one recursively until it finds an unused one. The function modifies the global mapping accordingly.
+- `retain` function: This function takes a URL and optionally an ID as input arguments and calls the `shorten!` function to store or update the mapping in the Ref. It then returns a response containing the status, headers, and body based on whether the operation was successful or not.
+- `redirect` function: This function receives an ID as input, checks if it exists in the mappings, and then redirects to the corresponding URL using Ring's response/redirect function. If the ID does not exist, it returns a 404 error with an appropriate message.
+- `app*` defroutes: This section defines the routes for the API. It provides handlers for GET and POST requests to the root path ("/" and "/:id"), PUT requests to the "/:id" path, and a route to list all shortened URLs (/list/).
+- `app` handler: It wraps the `app*` routes with the Compojure API middleware.
+
+Areas for Improvement:
+- Commenting could be improved to provide more context on what each function does and how it works, especially complex functions like shorten!.
+- More comprehensive error handling can be added to handle unexpected issues during URL retrieval or redirection.
